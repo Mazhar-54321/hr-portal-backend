@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
 import { IEmployee } from "../interfaces/employee.interface";
+import { getAllRoles } from "../utils/user.util";
 
 const employeeSchema = new Schema(
   {
@@ -8,7 +9,7 @@ const employeeSchema = new Schema(
     email: { type: String, required: true, unique: true },
     phone: { type: String },
     website: { type: String },
-    role: { type: String, enum: ["Admin", "Editor", "Viewer"], required: true },
+    role: { type: String, enum: getAllRoles(), required: true },
     isActive: { type: Boolean, default: true },
     skills: [{ type: String }],
     availableSlots: [{ type: String }],
@@ -24,4 +25,4 @@ const employeeSchema = new Schema(
   { timestamps: true }
 );
 
-export default model<IEmployee>("Employee", employeeSchema);
+export default model<IEmployee>("LifeMineEmployee", employeeSchema);

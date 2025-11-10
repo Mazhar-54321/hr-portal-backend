@@ -43,7 +43,6 @@ class App {
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());
     this.app.use(cookieParser())
-    this.app.use(morgan('combined', { stream: this.logStream }));
   }
 
   public initializeDatabase(): void {
