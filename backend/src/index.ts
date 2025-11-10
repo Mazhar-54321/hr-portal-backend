@@ -9,6 +9,7 @@ import routes from './routes';
 import Database from './config/database';
 import ErrorHandler from './middlewares/error.middleware';
 import Logger from './config/logger';
+import cookieParser from 'cookie-parser';
 
 import morgan from 'morgan';
 
@@ -41,6 +42,7 @@ class App {
     this.app.use(helmet());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());
+    this.app.use(cookieParser())
     this.app.use(morgan('combined', { stream: this.logStream }));
   }
 
@@ -49,7 +51,7 @@ class App {
   }
 
   public initializeRoutes(): void {
-    this.app.use(`/api/${this.api_version}`, routes());
+    this.app.use(`/api`, routes());
   }
 
   public initializeErrorHandlers(): void {
@@ -61,7 +63,7 @@ class App {
   public startApp(): void {
     this.app.listen(this.port, () => {
       this.logger.info(
-        `Server started at ${this.host}:${this.port}/api/${this.api_version}/`
+        `Server started at ${this.host}:${this.port}/api/`
       );
     });
   }

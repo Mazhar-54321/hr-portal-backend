@@ -52,7 +52,8 @@ export const refresh = async (req: Request, res: Response) => {
     );
 
     res.json({ accessToken });
-  } catch {
+  } catch(err) {
+    console.log(err)
     res.status(401).json({ message: "Failed to refresh token" });
   }
 };
