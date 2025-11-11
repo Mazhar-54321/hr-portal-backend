@@ -38,7 +38,10 @@ class App {
   }
 
   public initializeMiddleWares(): void {
-    this.app.use(cors());
+    this.app.use(cors({
+      origin: process.env.FRONTEND_URL,
+      credentials: true,          
+    }));
     this.app.use(helmet());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());
