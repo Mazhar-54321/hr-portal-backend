@@ -9,7 +9,7 @@ export const createEmployee = async (data: IEmployee) => {
 export const getEmployees = async (filter: any = {}, page: number = 1, limit: number = 10) => {
   const employees = await Employee.find(filter)
     .skip((page - 1) * limit)
-    .limit(limit);
+    .limit(limit).sort({updatedAt:-1});
 
   const total = await Employee.countDocuments(filter);
 
